@@ -22,6 +22,7 @@ This tool scans a target host for open TCP ports and supports CLI configuration,
 
 This scanner uses a worker pool architecture:
 
+```text
 Main Goroutine
   ├── Job Channel (ports)
   ├── Worker Goroutines (TCP scanners)
@@ -31,35 +32,55 @@ Each worker:
 1. Receives a port from the job queue
 2. Attempts a TCP connection using net.DialTimeout
 3. Returns whether the port is open
+```
 
 ---
 
 ## ⚙️ Usage
 
 ### Basic scan
+
+```bash
 go run . -host scanme.nmap.org
+```
 
 ### Custom port range
+
+```bash
 go run . -host scanme.nmap.org -ports 1-2000
+```
 
 ### Increase concurrency
+
+```bash
 go run . -host scanme.nmap.org -workers 200
+```
 
 ### Faster scan mode
+
+```bash
 go run . -host scanme.nmap.org -fast
+```
 
 ### Save results to file
 
 CSV:
+
+```bash
 go run . -host scanme.nmap.org -out results.csv
+```
 
 JSON:
+
+```bash
 go run . -host scanme.nmap.org -json -out results.json
+```
 
 ---
 
 ## 📊 Example Output
 
+```
 ====================================
 Go Concurrent Port Scanner
 ====================================
@@ -79,6 +100,7 @@ Scan Complete
 Open Ports    : 2
 Ports Scanned : 1024
 Elapsed Time  : 1.7s
+```
 
 ---
 
